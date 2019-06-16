@@ -32,9 +32,9 @@ exports.firestore_backup = functions.runWith({
   timeoutSeconds: 540, // Increase timeout to maximum. You can remove this line if your database is not terribly large.
   memory: '128MB' // We only do one HTTP request, so we don't need many resources. Let's save money!
 }).pubsub.schedule('every 24 hours').onRun(firestoreBackup.createBackupHandler(
-  'your-project-backups', // The Google Cloud Storage Bucket to use (without gs://), default to the default bucket ('your-project-id.appspot.com')
+  'your-project-backups', // Optionally: The Google Cloud Storage Bucket to use (without gs://), defaults to the default bucket ('your-project-id.appspot.com')
   'path/to/backups', // Optionally: the path inside the bucket. Defaults to 'firestore'
-  'firestore-instance-id' // Optionally the Firestore instance id to backup. If you did not create a second Firestore instance, you can leave this out. Defaults to '(default)'
+  'firestore-instance-id' // Optionally: the Firestore instance id to backup. If you did not create a second Firestore instance, you can leave this out. Defaults to '(default)'
 ))
 ```
 
