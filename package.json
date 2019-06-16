@@ -1,0 +1,31 @@
+{
+  "name": "simple-firestore-backup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "googleapis": "^40.0.0",
+    "moment": "^2.24.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crysxd/simple-firestore-backup.git"
+  },
+  "keywords": [
+    "firestore",
+    "backup",
+    "firebase"
+  ],
+  "author": "Christian Würthner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crysxd/simple-firestore-backup/issues"
+  },
+  "homepage": "https://github.com/crysxd/simple-firestore-backup#readme"
+}
