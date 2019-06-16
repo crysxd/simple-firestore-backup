@@ -6,7 +6,7 @@ exports.createBackupHandler = (bucket = undefined, bucketPath = 'firestore', fir
       google
     } = require('googleapis');
 
-    let path, accessToken, projectId;
+    let path, projectId;
 
     return google.auth.getProjectId().then(id => {
       projectId = id;
@@ -16,10 +16,7 @@ exports.createBackupHandler = (bucket = undefined, bucketPath = 'firestore', fir
     }).then(auth => {
       return auth.getAccessToken()
     }).then(accessTokenResponse => {
-      accessToken = accessTokenResponse.token;
-      return request.get(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`)
-    }).then(response => {
-      console.log(`Running with user '${JSON.parse(response).email}' on project '${projectId}'`);
+      const accessToken = accessTokenResponse.token;
 
       const headers = {
         'Content-Type': 'application/json',
@@ -46,7 +43,7 @@ exports.createBackupHandler = (bucket = undefined, bucketPath = 'firestore', fir
         headers: headers
       });
     }).then(response => {
-      console.log(`Backup completed with path '${path}'`);
+      return console.log(`Backup completed with path '${path}'`);
     }).catch(e => {
       console.error('Backup failed', e.error || e);
     });
