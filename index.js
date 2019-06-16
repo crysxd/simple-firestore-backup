@@ -1,4 +1,4 @@
-export.createBackupHandler = (projectId, bucket, bucketPath = 'firestore', firestoreInstance = '(default)') => {
+exports.createBackupHandler = (projectId, bucket, bucketPath = 'firestore', firestoreInstance = '(default)') => {
   return () => {
     const moment = require('moment');
     const request = require('request-promise')
@@ -6,11 +6,13 @@ export.createBackupHandler = (projectId, bucket, bucketPath = 'firestore', fires
       google
     } = require('googleapis');
 
-    const auth = await google.auth.getClient({
-      scopes: ['https://www.googleapis.com/auth/datastore']
-    });
+    let path;
 
-    auth.getAccessToken().then(accessTokenResponse => {
+    return google.auth.getClient({
+      scopes: ['https://www.googleapis.com/auth/datastore']
+    }).then(auth => {
+      return auth.getAccessToken()
+    }).then(accessTokenResponse => {
       const accessToken = accessTokenResponse.token;
 
       const headers = {
@@ -19,7 +21,7 @@ export.createBackupHandler = (projectId, bucket, bucketPath = 'firestore', fires
       };
 
       const timestamp = moment().format('YYYY-MM-DD HH:mm:ss')
-      let path = 'gs://' + `${bucket}/${bucketPath}/${firestoreInstance}/`.replace(/\/\//g, '/');
+      path = 'gs://' + `${bucket}/${bucketPath}/${firestoreInstance}/`.replace(/\/\//g, '/');
       if (path.endsWith('/')) {
         path += timestamp;
       } else {
@@ -42,4 +44,5 @@ export.createBackupHandler = (projectId, bucket, bucketPath = 'firestore', fires
     }).catch(e => {
       console.error('Backup failed', e.error || e);
     });
+  }
 }
