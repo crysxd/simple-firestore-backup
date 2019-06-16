@@ -45,7 +45,11 @@ exports.createBackupHandler = (bucket = undefined, bucketPath = 'firestore', fir
     }).then(response => {
       return console.log(`Backup completed with path '${path}'`);
     }).catch(e => {
-      console.error('Backup failed', e.error || e);
+      if ((e.error || {}).code == 403) {
+        console.error("Backup failed: PERMISSION DENIED. This is most likely due to missing roles of the service account. Please follow the instruction to set everything up: https://bit.ly/2ZuwLZj");
+      } else {
+        console.error('Backup failed', e.error || e);
+      }
     });
   }
 }
