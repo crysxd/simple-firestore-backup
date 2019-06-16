@@ -2,7 +2,7 @@ This is a simple npm package to backup Firestore databases on a schedule using G
 
 # Schedule backups
 
-- Billing needs to be enabled in order to use Firestore Import/Export. Go to your Firebase console and chnage your plan to 'Blaze' / 'Pay-As-You-Go'. please note that the free tier limts are still free.
+- Billing needs to be enabled in order to use Firestore Import/Export. Go to your Firebase console and change your plan to 'Blaze' / 'Pay-As-You-Go'. Please note that the free tier limits are still free.
 - It's advised to create a separate Storage Bucket for your backups.
   - In your Firebase console, go to 'Storage' and select 'Add bucket' in the three-dot-menu in the upper right. Name your bucket e.g. 'your-project-backups'.
   - Go to the 'Rules' tab, select your new bucket and use this rules to prevent 3rd party access:
