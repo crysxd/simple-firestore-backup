@@ -22,7 +22,10 @@ service firebase.storage {
 ```
 const firestoreBackup = require('simple-firestore-backup')
 
-exports.firestore_backup = functions.pubsub.schedule('every 24 hours').onRun(firestoreBackup.createBackupHandler(
+exports.firestore_backup = functions.runWith({
+  timeoutSeconds: 540, // Increase timeout to maximum. You can remove this line if your database is not terribly large.
+  memory: '128MB' // We only do one HTTP request, so we don't need many resources. Let's save money!
+}).pubsub.schedule('every 24 hours').onRun(firestoreBackup.createBackupHandler(
   'your-project', // The project ID to use
   'your-project-backups', // The Google Cloud Storage Bucket to use
   'path/to/backups', // Optionally: the path inside the bucket. Defaults to 'firestore'
