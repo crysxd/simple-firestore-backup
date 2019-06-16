@@ -22,7 +22,7 @@ service firebase.storage {
   - Add the role 'Datastore Import Export Admin', 'Storage Admin' and 'Editor'.
   - Click save and verify that _all three_ roles are listed in the 'Roles' column
   - It can take a couple of minutes for the new roles to be applied
-  - Explanation: Import/Export is currently only available over Rest/RPC. To trigger the export this module needs to authenticate over HTTP. If the roles mentioned above are not added, the generated access token lacks the required permissions resulting in an "Backup failed { error: { code: 403, message: 'The caller does not have permission', status: 'PERMISSION_DENIED' } }" error.
+  - Explanation: Import/Export is currently only available over Rest/RPC. To trigger the export this module needs to authenticate over HTTP. If the roles mentioned above are not added, the generated access token lacks the required permissions resulting in an 'PERMISSION_DENIED' error.
 
 - Create a new Firebase Cloud Function with below code. See [here](https://firebase.google.com/docs/functions/schedule-functions) for scheduling options. Below example runs once a day.
 
