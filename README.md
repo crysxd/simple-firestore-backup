@@ -17,6 +17,12 @@ service firebase.storage {
   }
 ```
 
+- Add the correct permission to the Cloud Function's service account
+  - Go to the [IAM page](https://console.cloud.google.com/iam-admin/iam) and make sure the right project is selected in the top left. Look for 'App Engine default service account' in the user list and click the pen icon next to it.
+  - Add the role 'Datastore Import Export Admin' and 'Storage Admin'
+  - It can take a couple of minutes for the new roles to be applied
+  - Explanation: Import/Export is currently only available over Rest/RPC. To trigger the export this module needs to authenticate over HTTP. If the roles mentioned above are not added, the generated access token lacks the required permissions resulting in an "Backup failed { error: { code: 403, message: 'The caller does not have permission', status: 'PERMISSION_DENIED' } }" error.
+
 - Create a new Firebase Cloud Function with below code. See [here](https://firebase.google.com/docs/functions/schedule-functions) for scheduling options. Below example runs once a day.
 
 ```
