@@ -20,6 +20,8 @@ service firebase.storage {
 - Create a new Firebase Cloud Function with below code. See [here](https://firebase.google.com/docs/functions/schedule-functions) for scheduling options. Below example runs once a day.
 
 ```
+const firestoreBackup = require('simple-firestore-backup')
+
 exports.firestore_backup = functions.pubsub.schedule('every 24 hours').onRun(firestoreBackup.createBackupHandler(
   'your-project', // The project ID to use
   'your-project-backups', // The Google Cloud Storage Bucket to use
